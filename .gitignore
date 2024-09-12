@@ -1,0 +1,5 @@
+*
+!*.cpp
+!*.in
+!*.out
+!.gitignore
