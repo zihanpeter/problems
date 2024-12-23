@@ -15,16 +15,16 @@ void dfs(int x, int f) {
         int y = to[i];
         if (y == f) continue;
         dfs(y, x);
-        a[x] += a[y] + 1;
+        a[x] += a[y];
     }
 }
 
-void dfs1(int x, int f) {
+void dfs2(int x, int f) {
     if (a[f]) a[x] += a[f] + 1;
     for (int i = head[x]; i; i = nxt[i]) {
         int y = to[i];
         if (y == f) continue;
-        dfs1(y, x);
+        dfs2(y, x);
     }
 }
 
@@ -40,9 +40,6 @@ int main() {
         mk[u] = true;
     }
     dfs(1, 0);
-    for (int i = 1; i <= n; ++i) cout << a[i] << ' ';
-    cout << endl;
-    dfs1(1, 0);
-    for (int i = 1; i <= n; ++i) cout << a[i] << ' ';
+    
     return 0;
 }
