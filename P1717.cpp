@@ -7,6 +7,7 @@ priority_queue<int> q;
 
 int main() {
     scanf("%d%d", &n, &h);
+	h *= 12;
     for (int i = 1; i <= n; ++i) scanf("%d", f + i);
     for (int i = 1; i <= n; ++i) scanf("%d", d + i);
     for (int i = 1; i < n; ++i) {
