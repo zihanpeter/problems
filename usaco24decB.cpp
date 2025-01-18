@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
 const int N = 3e5 + 5;
 int n, k, a[N], b[N], tree[N << 2], lazy[N << 2];
@@ -15,10 +16,10 @@ bool cmp(node x, node y) {
 
 void deal() {
     sort(b + 1, b + n + 1);
-    for (int i = 1; i <= n; ++i) a[i] = lower_bound(b + 1, b + n + 1, a[i]) - b - 1;
+    for (int i = 1; i <= n; ++i) a[i] = lower_bound(b + 1, b + n + 1, a[i]) - b;
     for (int i = 1; i <= k; ++i) {
-        nds[i].l = lower_bound(b + 1, b + n + 1, nds[i].l) - b - 1;
-        nds[i].r = lower_bound(b + 1, b + n + 1, nds[i].r) - b - 1;
+        nds[i].l = lower_bound(b + 1, b + n + 1, nds[i].l) - b;
+        nds[i].r = lower_bound(b + 1, b + n + 1, nds[i].r) - b;
     }
 }
 
@@ -38,7 +39,9 @@ void push_up(int id) {
 }
 
 int query(int id, int l, int r, int L, int R) {
-    if (L <= l && r <= R) return tree[id];
+    if (L <= l && r <= R) {
+        return tree[id];
+    }
     push_down(id, l, r);
     int mid = l + r >> 1, ans = 0;
     if (L <= mid) ans += query(id << 1, l, mid, L, R);
@@ -60,7 +63,6 @@ void update(int id, int l, int r, int L, int R) {
 }
 
 int main() {
-    freopen("usaco24decB.out", "w", stdout);
     freopen("usaco24decB.in", "r", stdin);
     int T;
     scanf("%d", &T);
@@ -72,13 +74,11 @@ int main() {
             scanf("%d", a + i);
             b[i] = a[i];
         }
-        for (int i = 1; i <= k; ++i) scanf("%d%d%d", &nds[i].l, &nds[i].r, &nds[i].t); // 这个也需要离散化？
-        // 离散化？
-        deal();
-        sort(nds + 1, nds + n + 1, cmp);
+        for (int i = 1; i <= k; ++i) scanf("%d%d%d", &nds[i].l, &nds[i].r, &nds[i].t);
+        // deal();
+        sort(nds + 1, nds + k + 1, cmp);
         for (int i = 1; i <= k; ++i) {
             int res = query(1, 1, n, nds[i].l, nds[i].r);
-            cout << "-------" << endl;
             int c = nds[i].t - res;
             if (c < nds[i].r - nds[i - 1].r) {
                 update(1, 1, n, nds[i].r, nds[i].r - c + 1);
