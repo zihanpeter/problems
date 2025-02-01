@@ -1,4 +1,3 @@
-// P9124 [USACO23FEB] Bakery S
 #include <iostream>
 #include <cmath>
 #define int long long
@@ -15,20 +14,17 @@ di-bi*mid<=(ai-bi)*t1
 */
 
 bool check(int mid) {
-    int maxf = 0, minf = INF;
+    int maxf = min(tc - 1, mid), minf = max(0ll, mid - tm + 1);
     for (int i = 1; i <= n; ++i) {
+        d[i] = -c[i] + a[i] * tc + b[i] * tm;
         if (a[i] == b[i] && d[i] - b[i] * mid > 0)
             return false;
         if (a[i] == b[i]) continue;
         double t = (d[i] - b[i] * mid) * 1.0 / (a[i] - b[i]);
-        if (a[i] < b[i] && t < 1) 
-            return false;
-        else
-            minf = min(minf, (int)ceil(t));
-        if (a[i] > b[i] && t >= min(mid, tc)) 
-            return false;
-        else
-            maxf = max(maxf, (int)t);
+        if (a[i] < b[i]) 
+            maxf = min(maxf, (int)floor(t));
+        else if (a[i] > b[i]) 
+            minf = max(minf, (int)ceil(t));
     }
     return maxf >= minf;
 }
@@ -41,7 +37,6 @@ signed main() {
         cin >> n >> tc >> tm;
         for (int i = 1; i <= n; ++i) {
             cin >> a[i] >> b[i] >> c[i];
-            d[i] = -c[i] + a[i] * tc + b[i] * tm;
             // cout << d[i] << ' ';
         }
         // cout << endl;
