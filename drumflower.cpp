@@ -5,20 +5,21 @@ using namespace std;
 const int N = 1e5 + 5;
 int n, m;
 int t[N];
-bool tong[N]; // ¼ÇÂ¼ÌÔÌ­µÄÐÅÏ¢
-queue<int> q; // ¼ÇÂ¼ÌÔÌ­µÄË³Ðò
+
+bool tong[N]; // ï¿½ï¿½Â¼ï¿½ï¿½Ì­ï¿½ï¿½ï¿½ï¿½Ï¢
+queue<int> q; // ï¿½ï¿½Â¼ï¿½ï¿½Ì­ï¿½ï¿½Ë³ï¿½ï¿½
 int main() {
     cin >> n >> m;
     for (int i = 1; i <= n; ++i) 
         cin >> t[i];
-    int cnt = 0; // cnt¼ÇÂ¼ÌÔÌ­ÁË¶àÉÙ¸öÈË
-    int tr = 0; // tr¼ÇÂ¼Ê±¿Ì
+    int cnt = 0; // cntï¿½ï¿½Â¼ï¿½ï¿½Ì­ï¿½Ë¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½
+    int tr = 0; // trï¿½ï¿½Â¼Ê±ï¿½ï¿½
     while (cnt != n - 1) {
         for (int i = 1; i <= n; ++i) {
             if (tong[i]) 
                 continue;
             tr += t[i];
-            if (tr > m) { // i±»ÌÔÌ­ÁË
+            if (tr > m) { // iï¿½ï¿½ï¿½ï¿½Ì­ï¿½ï¿½
                 tong[i] = true;
                 q.push(i);
                 ++cnt;
