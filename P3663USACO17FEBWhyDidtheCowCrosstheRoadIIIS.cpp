@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 const int N = 1e2 + 5;
-int n, k, r, cnt, blo, vcnt[N];
+int n, k, r, cnt, blo, vcnt[N * N];
 int cx[] = {0, 0, -1, 1};
 int cy[] = {-1, 1, 0, 0};
 bool vis[N][N], road[N][N][4], cow[N][N];
@@ -16,8 +16,9 @@ int checkDirect(int x1, int y1, int x2, int y2) {
 void dfs(int x, int y) {
     if (cow[x][y]) ++cnt;
     for (int i = 0; i < 4; ++i) {
+        if (road[x][y][i]) continue;
         int tx = x + cx[i], ty = y + cy[i];
-        if (tx < 1 || tx > n || ty < 1 || ty > n || road[x][y][i] || vis[tx][ty]) 
+        if (tx < 1 || tx > n || ty < 1 || ty > n || vis[tx][ty]) 
             continue;
         vis[tx][ty] = true;
         dfs(tx, ty);
