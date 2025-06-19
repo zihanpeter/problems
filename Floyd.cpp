@@ -9,15 +9,15 @@ int main(){
 			cin>>g[i][j];
 		}
 	}
-	for(int k=1;k<=n;k++){//ÖÐ×ªÕ¾ 
-		for(int i=1;i<=n;i++){//Æðµã 
-			for(int j=1;j<=n;j++){//ÖÕµã 
+	for(int k=1;k<=n;k++){//ï¿½ï¿½×ªÕ¾ 
+		for(int i=1;i<=n;i++){//ï¿½ï¿½ï¿½ 
+			for(int j=1;j<=n;j++){//ï¿½Õµï¿½ 
 				g[i][j] = min(g[i][j], g[i][k]+g[k][j]);
 			}
 		} 
 	}
 	for(int i=1;i<=n;i++){
-		if(g[i][i] < 0){//´æÔÚ¸º»· 
+		if(g[i][i] < 0){//ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ 
 			cout<<"No Solution"<<endl; 
 			return 0;
 		}

@@ -7,9 +7,11 @@ int n, q, a[N], tree[N << 2];
 struct node {
 	int x, y;
 } lazy[N << 2];
+
 void pushUp(int id) {
 	tree[id] = max(tree[id << 1], tree[id << 1 | 1]);
 }
+
 void build(int id, int l, int r) {
 	if (l == r) {
 		tree[id] = a[l];
@@ -20,6 +22,7 @@ void build(int id, int l, int r) {
 	build(id << 1 | 1, mid + 1, r);
 	pushUp(id);
 }
+
 void pushDown(int id, int l, int r) {
 	int mid = (l + r) >> 1;
 	if (lazy[id].x != -1) {
@@ -37,6 +40,7 @@ void pushDown(int id, int l, int r) {
 		lazy[id].y = 0;
 	}
 }
+
 void update(int id, int l, int r, int L, int R, int v) {
 	if (L <= l && r <= R) {
 		tree[id] += (r - l + 1) * v;
@@ -86,7 +90,9 @@ int query(int id, int l, int r, int L, int R) {
 	}
 	return ans;
 }
+
 signed main() {
+	freopen("P1253.in", "r", stdin);
 	scanf("%lld%lld", &n, &q);
 	for (int i = 1; i <= n; ++i) {
 		scanf("%lld", a + i);

@@ -8,9 +8,8 @@ bool check(int x) {
 }
 
 int main() {
-    int x;
-    cin >> x;
-    if (check(x)) cout << "SHOUT!" << endl;
-    else cout << "SIT DOWN!" << endl;
+	int a, b;
+	b = a / 3 + !(a % 3);
+	cout << b << endl;
     return 0;
 }
